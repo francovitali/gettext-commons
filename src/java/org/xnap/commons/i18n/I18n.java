@@ -148,7 +148,13 @@ public class I18n {
 	 */
 	public synchronized void setResources(String baseName, Locale locale, ClassLoader loader)
 	{
-		this.bundle = ResourceBundle.getBundle(baseName, locale, loader);
+		this.bundle = ResourceBundle.getBundle(baseName, locale, loader, new ResourceBundle.Control() {
+			@Override
+			public Locale getFallbackLocale(String baseName, Locale locale) {
+				return locale.equals(sourceCodeLocale) ? null : sourceCodeLocale;
+			}
+		});
+
 		this.baseName = baseName;
 		this.locale = locale;
 		this.loader = loader;
