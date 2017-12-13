@@ -27,6 +27,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Stores a list of {@link I18n} objects by a String key.
@@ -38,7 +39,7 @@ class I18nCache {
     /**
      * Map<String, List<I18n>>, list is synchronized too.
      */
-    private final Map<String, I18n> cache = new ConcurrentHashMap<>();
+    private final Map<String, I18n> cache = new ConcurrentHashMap<String, I18n>();
 
     I18nCache() {
     }
@@ -59,8 +60,8 @@ class I18nCache {
 
     public void put(String packageName, I18n i18n) {
         String key = getKey(packageName, i18n);
-        
-        cache.put(key, i18n)
+
+        cache.put(key, i18n);
     }
 
     public void visit(final Visitor visitor) {
