@@ -1,5 +1,5 @@
 group 'com.googlecode.gettext-commons'
-version '9.12-ml'
+version '9.13-ml'
 
 apply plugin: 'java'
 apply plugin: 'maven-publish'
